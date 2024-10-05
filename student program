@@ -1,0 +1,71 @@
+
+using System;
+public interface IPerson
+{
+    void DisplayInformation();
+}
+
+public class Student : IPerson
+{
+    protected string studentName;
+    protected int studentID;
+    protected int age;
+
+    public Student(string name, int id, int age)
+    {
+        this.studentName = name;
+        this.studentID = id;
+        this.age = age;
+    }
+
+    public string GetStudentName() => studentName;
+    public void SetStudentName(string name) => studentName = name;
+
+    public int GetStudentID() => studentID;
+    public void SetStudentID(int id) => studentID = id;
+
+    public int GetAge() => age;
+    public void SetAge(int age) => this.age = age;
+
+    public virtual void DisplayInformation()
+    {
+        Console.WriteLine($"Name: {studentName}, ID: {studentID}, Age: {age}");
+    }
+
+    public (string, int, int) GetStudentInfo()
+    {
+        return (studentName, studentID, age);
+    }
+}
+
+public class CollegeStudent : Student
+{
+    protected string major;
+    protected int averageGrade;
+
+    public CollegeStudent(string name, int id, int age, string major, int average)
+        : base(name, id, age)
+    {
+        this.major = major;
+        this.averageGrade = average;
+    }
+
+    public override void DisplayInformation()
+    {
+        Console.WriteLine($"Name: {studentName}, ID: {studentID}, Age: {age}, Major: {major}, Average Grade: {averageGrade}");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Student student = new Student("John Doe", 12345, 20);
+        CollegeStudent collegeStudent = new CollegeStudent("Jane Smith", 67890, 22, "Computer Science", 85);
+
+        student.DisplayInformation();
+        collegeStudent.DisplayInformation();
+    }
+}
+
+
